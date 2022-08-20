@@ -1,6 +1,8 @@
 from telebot.async_telebot import AsyncTeleBot
 
 import os
+import json
 
-
-bot = AsyncTeleBot(os.getenv("TELEGRAM_API_KEY"))
+with open("src\config.json") as read:
+    cfg = json.load(read)
+bot = AsyncTeleBot(cfg["api-key"])
