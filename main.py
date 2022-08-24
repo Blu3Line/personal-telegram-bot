@@ -12,7 +12,7 @@ async def selamla(message):
 Tanıştığıma memnun oldum.
                        ''')
 
-
+#webhook yap
 if __name__ == "__main__":
     
     asyncio.run(bot.polling())
