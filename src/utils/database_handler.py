@@ -18,6 +18,16 @@ def get_words():
     result_list = cursor.fetchall()
     conn.close()
     return result_list
+
+def find_word(word):
+    conn = psycopg2.connect(DATABASE_URL)
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT * FROM engtrwords WHERE "English" = %s or "Turkish" = %s;               
+    """,(word,word))
+    result_list = cursor.fetchall()
+    conn.close()
+    return result_list
 def add_new_word(engw,trw):
     conn = psycopg2.connect(DATABASE_URL)
     cursor = conn.cursor()
@@ -45,3 +55,5 @@ def get_verbs(tablename:str):
     conn.close()
     return result_lst
 ######################################################################################
+#TODO
+#dbden istenilen şey olmazsa diye ona göre respond atabilmeli 

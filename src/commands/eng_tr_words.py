@@ -3,7 +3,7 @@ from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 import random
 
 from src.objects import bot
-from src.utils.database_handler import get_words, add_new_word, delete_word
+from src.utils.database_handler import find_word, get_words, add_new_word, delete_word
 
 
 current_word = {}  # random seçilecek kelimeyi bu değişkende tutucaz
@@ -93,9 +93,10 @@ async def kelime_handler(message):
 
 @bot.message_handler(regexp="^(/ekle)\s(kelime)")
 async def kelime_ekle(message):
-    if len(message.text.strip().split()) == 4:
-        eng = message.text.strip().split()[2]
-        tr = message.text.strip().split()[3]
+    input = message.text.strip().split()
+    if len(input) == 4:
+        eng = input[2]
+        tr = input[3]
         add_new_word(eng, tr)
         await bot.reply_to(message, f"yeni kelime başarıyla eklendi: {eng}-{tr}")
     else:
@@ -104,16 +105,28 @@ async def kelime_ekle(message):
 
 @bot.message_handler(regexp="^(/sil)\s(kelime)")
 async def kelime_sil(message):
-    if len(message.text.strip().split()) == 4:
-        eng = message.text.strip().split()[2]
-        tr = message.text.strip().split()[3]
+    input = message.text.strip().split()
+    if len(input) == 4:
+        eng = input[2]
+        tr = input[3]
         delete_word(eng, tr)
         await bot.reply_to(message, f"kelime başarıyla silindi: {eng}-{tr}")
     else:
         await bot.reply_to(message, "kelimeyi silmek için:\n/sil kelime <ingilice> <türkçe>")
+
+@bot.message_handler(regexp="^(/bul)\s(kelime)")
+async def kelime_bul(message):
+    input = message.text.strip().split()
+    if (len(input)) == 3:
+        word = input[-1]
+        lst = find_word(word)#listenin içinde istenilen kelimeler tuple içinde
+        for i in lst:
+            await bot.reply_to(message, f"İngilizce:{i[0]}--Türkçe:{i[1]}\n")
+    else:
+        await bot.reply_to(message, "kelimeyi bulmak için:\n/bul kelime <ingilice veya türkçe>")
+        
+
 # TODO
-# /kelime english_word or turkish_word delete komutu ekle ve dbden silsin o kelimeyi
-# /kelime ekle <english> <turkish> olunca dbye kelime eklesin
 # büyük kelime haznesi olucağı için generators öğren buraya uygula
 # ileri seviye async öğren ve db ile iletişim ve bot reply olayını kısa süreye düşürmeye çalış
 # DATABASEDEN KELİME SAYISI 0 ALINIRSA DİYE BİR SENARYO YAZ
