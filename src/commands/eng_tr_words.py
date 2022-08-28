@@ -15,11 +15,6 @@ is_last_word = False
 
 
 def random_word():  # random kelimeyi current worde koyuyoruz
-    # global current_word
-
-    # current_word = random.choice(lst_data)
-    # return current_word
-
     global current_word
 
     while True:  # bu looopun amacı eğer wrong btn basılırsa random choice yine aynı olursa api hata verir o yüzden %100 farklı choice olmalı
