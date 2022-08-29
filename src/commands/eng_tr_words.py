@@ -86,39 +86,39 @@ async def kelime_handler(message):
     await bot.send_message(message.chat.id, random_word()["English"], reply_markup=card_keyboard())
 
 
-@bot.message_handler(regexp="^(/ekle)\s(kelime)")
+@bot.message_handler(commands=["ekle_kelime"])
 async def kelime_ekle(message):
     input = message.text.strip().split()
-    if len(input) == 4:
-        eng = input[2]
-        tr = input[3]
+    if len(input) == 3:
+        eng = input[1]
+        tr = input[2]
         add_new_word(eng, tr)
         await bot.reply_to(message, f"yeni kelime başarıyla eklendi: {eng}-{tr}")
     else:
-        await bot.reply_to(message, "yeni kelime eklemek için:\n/ekle kelime <ingilizce> <türkçe>")
+        await bot.reply_to(message, "yeni kelime eklemek için:\n/ekle_kelime <ingilizce> <türkçe>")
 
 
-@bot.message_handler(regexp="^(/sil)\s(kelime)")
+@bot.message_handler(commands=["sil_kelime"])
 async def kelime_sil(message):
     input = message.text.strip().split()
-    if len(input) == 4:
-        eng = input[2]
-        tr = input[3]
+    if len(input) == 3:
+        eng = input[1]
+        tr = input[2]
         delete_word(eng, tr)
         await bot.reply_to(message, f"kelime başarıyla silindi: {eng}-{tr}")
     else:
-        await bot.reply_to(message, "kelimeyi silmek için:\n/sil kelime <ingilice> <türkçe>")
+        await bot.reply_to(message, "kelimeyi silmek için:\n/sil_kelime <ingilice> <türkçe>")
 
-@bot.message_handler(regexp="^(/bul)\s(kelime)")
+@bot.message_handler(commands=["bul_kelime"])
 async def kelime_bul(message):
     input = message.text.strip().split()
-    if (len(input)) == 3:
+    if (len(input)) == 2:
         word = input[-1]
         lst = find_word(word)#listenin içinde istenilen kelimeler tuple içinde
         for i in lst:
             await bot.reply_to(message, f"İngilizce:{i[0]}--Türkçe:{i[1]}\n")
     else:
-        await bot.reply_to(message, "kelimeyi bulmak için:\n/bul kelime <ingilice veya türkçe>")
+        await bot.reply_to(message, "kelimeyi bulmak için:\n/bul_kelime <ingilice veya türkçe>")
         
 
 # TODO
