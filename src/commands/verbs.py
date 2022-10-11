@@ -3,7 +3,7 @@ from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 import random
 
 from src.objects import bot
-from src.utils.database_handler import get_verbs
+from src.Database.database_handler import get_verbs
 
 current_verb = {}  # random seçilecek kelimeyi bu değişkende tutucaz
 # inline keyboardların callback dataları ona göre callbackquery tetiklenicek

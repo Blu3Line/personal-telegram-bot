@@ -1,13 +1,17 @@
 from telebot.async_telebot import AsyncTeleBot
 
 import os
-import json
 
-# scrpt_path = os.path.abspath(__file__)
-# dirpath = os.path.dirname(scrpt_path)
-# cfgpath = os.path.join(dirpath, 'config.json')
+BOT = os.getenv("api-key")
 
-# with open(cfgpath) as f:
-#     cfg = json.load(f)
+if BOT == None:
+    print("executed")
+    from dotenv import load_dotenv
+    load_dotenv()
+    BOT = os.getenv("api-key")
+    
 
-bot = AsyncTeleBot(os.getenv("api-key"))
+DB_URI = os.getenv("DATABASE_URL")#cfg vars da hatalı yazmışım unlucky
+WEATHER_KEY = os.getenv("weather-key")
+
+bot = AsyncTeleBot(BOT)

@@ -1,17 +1,11 @@
 import requests
 
-import os
-import json
-
-from src import bot
+from src.objects import bot, WEATHER_KEY
 
 def weather_data(city:str):
-    cfgpath = os.path.abspath("config.json")
-    with open(cfgpath) as f:
-        cfg = json.load(f)
     
     parameters = {
-        "access_key":cfg["weatherkey"],
+        "access_key":WEATHER_KEY,
         "query":city
     }
     api_url = "http://api.weatherstack.com/current"

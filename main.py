@@ -12,10 +12,18 @@ async def selamla(message):
 Tanıştığıma memnun oldum {target.first_name}!
 ''')
 
-#webhook yap
+
 if __name__ == "__main__":
     
     asyncio.run(bot.polling(non_stop=True))
+    
+'''TODO:PRIORITY TODOS
+    -DATABASE TASARIMINI TAMAMLA VE BOT İÇİN GÜNCELLE
+    -HEROKU KALINTILARINI TEMİZLE
+    
+'''
+
+
 
 '''
 duyurular - Fırat Üniversitesi ilk 15 duyuruyu getirir.
@@ -26,5 +34,18 @@ sil_kelime - olan kelimeyi silme komutu
 bul_kelime - database den kelime bulma komutu
 hava_durumu - Güncel hava durumunu öğrenme
 '''
-#gizlilik olayını kontrol et
-#not uygulaması yap
+'''
+TODO
+komutları anlatan bir komut lazım
+gizlilik olayını kontrol et
+bot loglarını bir kanalda gösterme
+webhook yap
+'''
+'''
+TODO (optional)
+-güzel bir admin, owner panel yap
+ex{
+    -owner:Diğer adminlerin logları ve kullanıcı logları
+    -owner:admin yönetimi
+}
+'''

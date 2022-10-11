@@ -3,7 +3,7 @@ from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 import random
 
 from src.objects import bot
-from src.utils.database_handler import find_word, get_words, add_new_word, delete_word
+from src.Database.database_handler import find_word, get_words, add_new_word, delete_word
 
 
 current_word = {}  # random seçilecek kelimeyi bu değişkende tutucaz
